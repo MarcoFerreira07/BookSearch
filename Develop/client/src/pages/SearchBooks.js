@@ -6,11 +6,11 @@ import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import { SAVE_BOOK } from '../utils/mutations';
+import { SAVE_BOOK } from '../utils/mutation';
 
 const SearchBooks = () => {
-
-  const {  data } = useQuery(GET_ME);
+const { data } = useQuery(GET_ME);
+  
   const user = data?.me  || {};
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
@@ -47,10 +47,10 @@ const SearchBooks = () => {
 
       const bookData = items.map((book) => ({
         bookId: book.id,
-        authors: book.volumeInfo.authors || ['No author to display'],
+        authors: book.volumeInfo.authors,
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
-        image: book.volumeInfo.imageLinks?.thumbnail || '',
+        image: book.volumeInfo.imageLinks?.thumbnail ,
       }));
 
       setSearchedBooks(bookData);
